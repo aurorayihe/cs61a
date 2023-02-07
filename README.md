@@ -12,5 +12,5 @@ Date Started: 1/16/2023
 ### Lecture 1: Computer Science 1/18/2023
 ### Lecture 2: Functions 1/20/2023
 ### Lecture 3: Control 1/23/2023
-### Lecture 4: High-Order Functions 1/27/2023 
+### Lecture 4: High-Order Functions 1/27/2023 Started Hog
 ### Lecture 5:
