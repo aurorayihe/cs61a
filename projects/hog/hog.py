@@ -23,6 +23,17 @@ def roll_dice(num_rolls, dice=six_sided):
     assert num_rolls > 0, 'Must roll at least once.'
     # BEGIN PROBLEM 1
     "*** YOUR CODE HERE ***"
+    total = 0
+    sowSadFlag = False
+    for i in range(num_rolls):
+        dice_num = dice()
+        if dice_num == 1:
+            sowSadFlag = True
+        else:
+            total += dice_num
+    if sowSadFlag == True:
+        total = 1
+    return total
     # END PROBLEM 1
 
 
@@ -34,6 +45,11 @@ def tail_points(opponent_score):
     """
     # BEGIN PROBLEM 2
     "*** YOUR CODE HERE ***"
+    last_digit, second_last_digit = opponent_score%10, (opponent_score//10)%10
+    if last_digit > second_last_digit:
+        return 1+ 2*(last_digit - second_last_digit)
+    else:
+        return 1+ 2*(second_last_digit - last_digit)
     # END PROBLEM 2
 
 
