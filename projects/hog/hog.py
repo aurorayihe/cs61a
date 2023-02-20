@@ -67,6 +67,12 @@ def take_turn(num_rolls, opponent_score, dice=six_sided):
     assert num_rolls <= 10, 'Cannot roll more than 10 dice.'
     # BEGIN PROBLEM 3
     "*** YOUR CODE HERE ***"
+    my_score = 0
+    if num_rolls == 0:
+        return tail_points(opponent_score)
+    else:
+        my_score = roll_dice(num_rolls, dice)
+        return my_score
     # END PROBLEM 3
 
 
@@ -89,6 +95,23 @@ def square_update(num_rolls, player_score, opponent_score, dice=six_sided):
 
 
 # BEGIN PROBLEM 4
+def perfect_square(score):
+    num = 0
+    while num*num <= score:
+        if num*num == score:
+            return True
+        else:
+            num += 1
+    return False
+ 
+def next_perfect_square(score):
+    num = 0
+    while num*num <= score:
+        if num*num == score:
+            return (num+1)*(num+1)
+        else:
+            num += 1
+    return next_square
 "*** YOUR CODE HERE ***"
 # END PROBLEM 4
 
@@ -129,6 +152,14 @@ def play(strategy0, strategy1, update,
     who = 0  # Who is about to take a turn, 0 (first) or 1 (second)
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
+    while score0<goal and score1<goal:
+        if who == 0:
+            dice_num = strategy0(score0, score1)
+            score0 = update(dice_num, score0, score1, dice)
+        else:
+            dice_num = strategy1(score1, score0)
+            score1 = update(dice_num, score1, score0, dice)
+        who = 1 - who
     # END PROBLEM 5
     return score0, score1
 
@@ -154,6 +185,9 @@ def always_roll(n):
     assert n >= 0 and n <= 10
     # BEGIN PROBLEM 6
     "*** YOUR CODE HERE ***"
+    def strategy(current_player_score, opponent_score):
+        return n
+    return strategy
     # END PROBLEM 6
 
 
@@ -184,6 +218,13 @@ def is_always_roll(strategy, goal=GOAL):
     """
     # BEGIN PROBLEM 7
     "*** YOUR CODE HERE ***"
+    dice_num = strategy(0 , 0)
+    for score0 in range(goal):
+        for score1 in range(goal):
+            outcome = strategy(score0, score1)
+            if outcome != dice_num:
+                return False
+    return True
     # END PROBLEM 7
 
 
@@ -200,6 +241,13 @@ def make_averaged(original_function, total_samples=1000):
     """
     # BEGIN PROBLEM 8
     "*** YOUR CODE HERE ***"
+    def averaged_dice(*args):
+        sum = 0
+        for i in range(total_samples):
+            current_num = original_function(*args)
+            sum += current_num
+            return sum/total_samples
+        return averaged_dice
     # END PROBLEM 8
 
 
