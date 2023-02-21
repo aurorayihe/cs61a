@@ -94,3 +94,63 @@ def count_partitions(n, m):
         with_m = count_partitions(n-m, m)
         without_m = count_partitions(n, m-1)
         return with_m + without_m
+
+
+# HW 3: How to understand the PingPong function implemented with high-order functions?
+def pingpong(n):
+    """Return the nth element of the ping-pong sequence.
+
+    >>> pingpong(8)
+    8
+    >>> pingpong(10)
+    6
+    >>> pingpong(15)
+    1
+    >>> pingpong(21)
+    -1
+    >>> pingpong(22)
+    -2
+    >>> pingpong(30)
+    -2
+    >>> pingpong(68)
+    0
+    >>> pingpong(69)
+    -1
+    >>> pingpong(80)
+    0
+    >>> pingpong(81)
+    1
+    >>> pingpong(82)
+    0
+    >>> pingpong(100)
+    -6
+    >>> from construct_check import check
+    >>> # ban assignment statements
+    >>> check(HW_SOURCE_FILE, 'pingpong',
+    ...       ['Assign', 'AnnAssign', 'AugAssign', 'NamedExpr'])
+    True
+    """
+    "*** YOUR CODE HERE ***"
+    def helper(result, count, direction):
+        if count >= n:
+            return result
+        elif num_eights(count) or count%8 == 0:
+            return helper(result - direction, count+1, -direction)
+        else: 
+            return helper(result + direction, count+1, direction)
+    return helper (1, 1, 1)
+
+def pingpong(n):
+    direction = 1
+    num = 0
+    while i in range(1, n+1):
+        num += direction
+        if num_eights(n):
+            direction = 0 - direction
+        elif num%8 == 0:
+            direction = 0 - direction
+    return num
+
+
+# The count coins function (a different kind of the count_partitions problem)
+

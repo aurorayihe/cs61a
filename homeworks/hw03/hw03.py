@@ -25,6 +25,13 @@ def num_eights(pos):
     True
     """
     "*** YOUR CODE HERE ***"
+    if pos <= 0:
+        return 0
+    elif pos%10 == 8: 
+        return num_eights(pos//10) + 1
+    else:
+        return num_eights(pos//10)
+    
 
 
 def pingpong(n):
@@ -61,6 +68,26 @@ def pingpong(n):
     True
     """
     "*** YOUR CODE HERE ***"
+    def helper(result, count, direction):
+        if count >= n:
+            return result
+        elif num_eights(count) or count%8 == 0:
+            return helper(result - direction, count+1, -direction)
+        else: 
+            return helper(result + direction, count+1, direction)
+    return helper (1, 1, 1)
+
+def pingpong(n):
+    direction = 1
+    num = 0
+    while i in range(1, n+1):
+        num += direction
+        if num_eights(n):
+            direction = 0 - direction
+        elif num%8 == 0:
+            direction = 0 - direction
+    return num
+
 
 
 def next_larger_coin(coin):
@@ -117,6 +144,18 @@ def count_coins(change):
     True
     """
     "*** YOUR CODE HERE ***"
+    def helper(change, max_coin):
+        if change < 0:
+            return 0
+        elif change == 0:
+            return 1
+        elif max_coin == None:
+            return 0
+        else:
+            return helper(change-max_coin,max_coin)+helper(change,next_larger_coin(max_coin))
+    return helper(change, 1)
+
+
 
 
 anonymous = False  # Change to True if you would like to remain anonymous on the final leaderboard.
