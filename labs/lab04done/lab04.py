@@ -62,6 +62,14 @@ def paths(m, n):
     1
     """
     "*** YOUR CODE HERE ***"
+    if n == 1:
+        return 1
+    elif m == 1:
+        return 1
+    elif m == 0 or n == 0:
+        return 0
+    else:
+        return paths(m-1, n) + paths(m, n-1)
 
 
 def couple(s, t):
@@ -78,6 +86,10 @@ def couple(s, t):
     """
     assert len(s) == len(t)
     "*** YOUR CODE HERE ***"
+    result = []
+    for i in range(len(s)):
+        result.insert(i, [s[i], t[i]])
+    return result
 
 
 def double_eights(n):
@@ -102,6 +114,18 @@ def double_eights(n):
     True
     """
     "*** YOUR CODE HERE ***"
+    if n == 88:
+        return True
+    elif n < 100:
+        return False
+    else:
+        last, second_last = n%10, (n//10)%10
+        if last == 8 and second_last == 8:
+            return True
+        else: 
+            return double_eights(n//10)
+    
+    
 
 
 def coords(fn, seq, lower, upper):
@@ -112,7 +136,7 @@ def coords(fn, seq, lower, upper):
     [[-2, 4], [1, 1], [3, 9]]
     """
     "*** YOUR CODE HERE ***"
-    return ______
+    return [[x, fn(x)] for x in seq if fn(x) >= lower and fn(x) <= upper]
 
 
 def riffle(deck):
@@ -125,4 +149,4 @@ def riffle(deck):
     [0, 10, 1, 11, 2, 12, 3, 13, 4, 14, 5, 15, 6, 16, 7, 17, 8, 18, 9, 19]
     """
     "*** YOUR CODE HERE ***"
-    return _______
+    return [deck[(i%2)*len(deck)//2 + i//2] for i in range(len(deck))]
